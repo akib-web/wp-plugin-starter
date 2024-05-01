@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'post-scraper/post-scraper',
+        'name' => 'wp-plugin-starter/wp-plugin-starter',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => NULL,
@@ -172,7 +172,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'post-scraper/post-scraper' => array(
+        'wp-plugin-starter/wp-plugin-starter' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => NULL,
