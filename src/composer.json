@@ -1,0 +1,19 @@
+{
+    "name": "post-scraper/post-scraper",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Md Akib Rahman",
+            "email": "mdakibrahman6@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^10.48",
+        "jenssegers/blade": "^2.0",
+        "symfony/var-dumper": "^6.4"
+    }
+}
