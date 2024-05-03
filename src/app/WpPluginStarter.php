@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Supports\Config;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Services\Services;
-use App\Services\Notices;
+use App\Supports\Notices;
+
 
 class WpPluginStarter
 {
@@ -14,7 +16,7 @@ class WpPluginStarter
    * one object from wp_plugin_starter class in whole of program execution.
    *
    * @access private
-   * @var    wp_plugin_starter $instance create only one instance from plugin primary class
+   * @var    WpPluginStarter $instance create only one instance from plugin primary class
    * @static
    */
   private static $instance;
@@ -22,7 +24,6 @@ class WpPluginStarter
   public function __construct()
   {
     $this->setEloquentModel();
-    $this->bindHelper();
     /**
      * Register activation hook.
      * Register activation hook for this plugin by invoking activate
@@ -69,7 +70,6 @@ class WpPluginStarter
   }
   public function setEloquentModel()
   {
-
     $capsule = new Capsule;
 
     $capsule->addConnection([
@@ -82,18 +82,14 @@ class WpPluginStarter
       'collation' => 'utf8_unicode_ci',
       'prefix'    => '',
     ]);
+    // $DBconfig = Config::get('database');
+    // dd($DBconfig);
+    // $capsule->addConnection($DBconfig);
 
     // Setup the Eloquent ORM
     $capsule->bootEloquent();
   }
 
-  public function bindHelper()
-  {
-    if (file_exists(PIKU_WPS_PLUGIN_PATH . '/src/app/Helpers/helper.php')) {
-      // Load the autoloader.
-      require PIKU_WPS_PLUGIN_PATH . '/src/app/Helpers/helper.php';
-    }
-  }
   public function activate()
   {
     // dump('activated');
@@ -111,5 +107,6 @@ class WpPluginStarter
     $message = 'Wp Starter pack is Running';
     Notices::display_notice($message, 'success');
     $services->loadScripts();
+    // dd(\App\Models\Product::all());
   }
 }

@@ -15,6 +15,7 @@
  * @package WpPluginStarter
  */
 
+// Reserved strings: Wp Plugin Starter , wp-plugin-starter , WPS , WpPluginStarter
 
 defined('ABSPATH') || exit;
 
@@ -29,16 +30,24 @@ if (file_exists(__DIR__ . '/src/vendor/autoload.php')) {
   // Load the autoloader.
   require __DIR__ . '/src/vendor/autoload.php';
 } else {
-  echo 'Problem in post scraper plugin';
-  wp_die();
+  echo 'Problem in autoloader';
+  exit;
 }
+
+if (file_exists(__DIR__ . '/functions.php')) {
+  // Load the autoloader.
+  require __DIR__ . '/functions.php';
+} else {
+  echo 'Problem in functions.php';
+  exit;
+}
+
 
 if (!\App\WpPluginStarter::init()) {
   return;
 }
 
-\App\WpPluginStarter::init();
-
+// \App\WpPluginStarter::init();
 
 
 
@@ -55,6 +64,6 @@ function display_products_shortcode()
   // Dump the data and halt execution
   // dd($data);
 
-  return view('test', ['title' => 'My Plugin', 'name' => 'World']);
+  // return view('test', ['title' => 'My Plugin', 'name' => 'World']);
 }
 add_shortcode('display_products', 'display_products_shortcode');
